@@ -10,8 +10,8 @@ export class Canvas {
         private readonly _canvasRenderContext: CanvasRenderingContext2D) {
 
         this._canvasRenderContext.font = "10px Joystix";
-    }                         
-                     
+    }
+
     setFont(font: string) {
         this._canvasRenderContext.font = font;
     }
@@ -25,7 +25,7 @@ export class Canvas {
         const oldContext = <CanvasRenderingContext2D>(canvas.getContext("2d"));
         if (imageOffset === undefined) {
             imageOffset = Point.zero;
-        }                
+        }
 
         if (imageSize === undefined) {
             imageSize = new Vector2D(image.width, image.height);
@@ -120,7 +120,7 @@ export class Canvas {
     }
 
     fillRect(color: string, topLeft: Point, size: Vector2D): void {
-        this._canvasRenderContext.fillStyle = "black";
+        this._canvasRenderContext.fillStyle = color;
         topLeft = topLeft.add(this._topLeft);
 
         this._canvasRenderContext.fillRect(topLeft.x, topLeft.y, size.x, size.y);
@@ -129,7 +129,7 @@ export class Canvas {
     drawRect(sprite: Sprite, color: string) {
         let topLeft = sprite.position.minus(sprite.origin);
         topLeft = topLeft.add(this._topLeft);
-        
+
         this._canvasRenderContext.beginPath();
         this._canvasRenderContext.rect(topLeft.x, topLeft.y, sprite.size.x, sprite.size.y);
         this._canvasRenderContext.lineWidth = .5;

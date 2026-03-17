@@ -8,7 +8,7 @@ import { Engine } from "../Engine";
 import { Act } from "./Act";
 import { ActUpdateResult } from "./ActUpdateResult";
 import { PlayerIntroAct } from "./PlayerIntroAct";
-import {BigPacChaseAct} from "./BigPacChaseAct";
+import { BigPacChaseAct } from "./BigPacChaseAct";
 
 /**
  * When the level is finished, the screen flashes white and blue.
@@ -39,8 +39,8 @@ export class LevelFinishedAct extends Act {
                 this._step += 1;
                 MainWindow.actors.maze.stopFlashing();
 
-                MainWindow.actors.maze.reset();
                 MainWindow.gameStats.levelFinished();
+                MainWindow.actors.maze.reset();
 
                 this._finished = true;
             });
@@ -58,19 +58,19 @@ export class LevelFinishedAct extends Act {
     get nextAct(): Act {
         const cutScene = MainWindow.gameStats.currentPlayerStats.levelStats.levelProps.introCutScene;
         const playerIntroAct = new PlayerIntroAct(false);
-        
+
         if (cutScene === IntroCutScene.None) {
             return playerIntroAct;
         }
-        
+
         if (cutScene === IntroCutScene.BigPac) {
             return new BigPacChaseAct(playerIntroAct);
         }
-        
+
         if (cutScene === IntroCutScene.GhostSnagged) {
             return new GhostTearAct(playerIntroAct);
         }
-        
+
         if (cutScene === IntroCutScene.TornGhostAndWorm) {
             return new TornGhostChaseAct(playerIntroAct);
         }
